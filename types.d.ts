@@ -10,7 +10,7 @@ declare module '@vue/runtime-core' {
     }
 }
 
-// example G declaration:
+// example G declaration (my-boardgame-types.ts):
 /*
 interface MyGameState {
     // ...
@@ -23,7 +23,7 @@ declare module '@vue/runtime-core' {
 }
 */
 
-export interface BoardgamePluginOptions {
+declare interface BoardgamePluginOptions {
     /** Whether or not to start the client automatically. */
     autostart?: boolean
     /** Provide `client` if you're initializing the client yourself. Ignores `options` if provided. */

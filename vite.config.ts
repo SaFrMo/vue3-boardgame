@@ -13,11 +13,12 @@ export default defineConfig({
         },
         rollupOptions: {
             // externalized deps that shouldn't be bundled
-            external: ['vue', 'boardgame.io'],
+            external: ['vue', 'boardgame.io/client'],
             output: {
                 // Provide global variables to use in the UMD build
                 // for externalized deps
                 globals: {
+                    'boardgame.io/client': 'Client',
                     vue: 'Vue'
                 }
             }
