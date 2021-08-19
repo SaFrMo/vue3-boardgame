@@ -1,6 +1,6 @@
 {
   "name": "vue3-boardgame",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
