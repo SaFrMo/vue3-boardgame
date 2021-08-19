@@ -1,10 +1,10 @@
 import { Client } from 'boardgame.io/client'
 import { _ClientImpl, ClientState } from 'boardgame.io/dist/types/src/client/client'
 import { Plugin, reactive } from 'vue'
-import { BoardgamePluginOptions } from './types'
+import { Vue3Boardgame } from './types'
 
 export const boardgamePlugin: Plugin = {
-    install(app, { autostart, client, options }: BoardgamePluginOptions) {
+    install(app, { autostart, client, options }: Vue3Boardgame.BoardgamePluginOptions) {
         // create client if we have options
         if (!client && options) {
             client = Client(options)

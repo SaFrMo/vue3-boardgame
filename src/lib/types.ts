@@ -23,11 +23,13 @@ declare module '@vue/runtime-core' {
 }
 */
 
-export interface BoardgamePluginOptions {
-    /** Whether or not to start the client automatically. */
-    autostart?: boolean
-    /** Provide `client` if you're initializing the client yourself. Ignores `options` if provided. */
-    client?: _ClientImpl
-    /** Provide options to let the plugin create the client automatically. */
-    options?: ClientOpts
+export namespace Vue3Boardgame {
+    export interface BoardgamePluginOptions {
+        /** Whether or not to start the client automatically. */
+        autostart?: boolean
+        /** Provide `client` if you're initializing the client yourself. Ignores `options` if provided. */
+        client?: _ClientImpl
+        /** Provide options to let the plugin create the client automatically. */
+        options?: ClientOpts
+    }
 }
