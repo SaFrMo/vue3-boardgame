@@ -1,7 +1,7 @@
 import { Client } from 'boardgame.io/client'
-import { _ClientImpl } from 'boardgame.io/dist/types/src/client/client'
+import { _ClientImpl, ClientState } from 'boardgame.io/dist/types/src/client/client'
 import { Plugin, reactive } from 'vue'
-import { BoardgamePluginOptions } from '../vue3-boardgame'
+import { BoardgamePluginOptions } from './types'
 
 export const boardgamePlugin: Plugin = {
     install(app, { autostart, client, options }: BoardgamePluginOptions) {
@@ -28,7 +28,7 @@ export const boardgamePlugin: Plugin = {
         const reactiveG = reactive({ G })
 
         // subscribe to client updates
-        client.subscribe(state => {
+        client.subscribe((state: ClientState<any>) => {
             if (!state) return
             reactiveG.G = state.G as any
         })

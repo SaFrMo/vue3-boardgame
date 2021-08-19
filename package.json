@@ -1,6 +1,6 @@
 {
   "name": "vue3-boardgame",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -11,8 +11,8 @@
     "vue": "^3.0.5"
   },
   "files": [
-    "dist",
-    "vue3-boardgame"
+    "src",
+    "dist"
   ],
   "main": "./dist/vue3-boardgame.umd.js",
   "module": "./dist/vue3-boardgame.es.js",
@@ -22,12 +22,13 @@
       "require": "./dist/vue3-boardgame.umd.js"
     }
   },
-  "types": "./vue3-boardgame/index.d.ts",
+  "types": "./dist/vue3-boardgame.es.d.ts",
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.3.0",
     "@vue/compiler-sfc": "^3.0.5",
     "typescript": "^4.3.2",
     "vite": "^2.4.4",
+    "vite-dts": "1.0.3",
     "vue-tsc": "^0.2.2"
   }
 }
