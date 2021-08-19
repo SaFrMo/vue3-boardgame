@@ -1,6 +1,6 @@
 {
   "name": "vue3-boardgame",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -22,7 +22,7 @@
       "require": "./dist/vue3-boardgame.umd.js"
     }
   },
-  "types": "./vue3-boardgame/types.d.ts",
+  "types": "./vue3-boardgame/index.d.ts",
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.3.0",
     "@vue/compiler-sfc": "^3.0.5",
