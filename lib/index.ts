@@ -1,7 +1,7 @@
 import { Client } from 'boardgame.io/client'
 import { _ClientImpl } from 'boardgame.io/dist/types/src/client/client'
 import { Plugin, reactive } from 'vue'
-import { BoardgamePluginOptions } from './types'
+import { BoardgamePluginOptions } from '../vue3-boardgame'
 
 export const boardgamePlugin: Plugin = {
     install(app, { autostart, client, options }: BoardgamePluginOptions) {

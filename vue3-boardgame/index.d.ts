@@ -23,7 +23,7 @@ declare module '@vue/runtime-core' {
 }
 */
 
-declare interface BoardgamePluginOptions {
+export interface BoardgamePluginOptions {
     /** Whether or not to start the client automatically. */
     autostart?: boolean
     /** Provide `client` if you're initializing the client yourself. Ignores `options` if provided. */
