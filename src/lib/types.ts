@@ -25,7 +25,7 @@ declare module '@vue/runtime-core' {
 
 export namespace Vue3Boardgame {
     export interface BoardgamePluginOptions {
-        /** Whether or not to start the client automatically. */
+        /** Whether or not to start the client automatically. If `false`, you must call `.start()` yourself on your game client. Default `true`. */
         autostart?: boolean
         /** Provide `client` if you're initializing the client yourself. Ignores `options` if provided. */
         client?: _ClientImpl

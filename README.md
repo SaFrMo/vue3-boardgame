@@ -1,27 +1,80 @@
-# Vue 3 + Typescript + Vite
+# Vue 3 + boardgame.io
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+This is a plugin to make developing a Vue 3/[boardgame.io](https://boardgame.io/) app easier.
 
-## Recommended IDE Setup
+## Installation
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+`npm install vue3-boardgame`
 
-### If Using `<script setup>`
+Then, [create your Vue 3 app](https://v3.vuejs.org/guide/instance.html) and install:
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+```js
+import { createApp } from 'vue'
+import App from 'YourApp.vue'
+import { boardgamePlugin } from 'vue3-boardgame'
 
-## Type Support For `.vue` Imports in TS
+const app = createApp(App)
+app.use(boardgamePlugin, { 
+    // select one of the following:
+    options: {},    // an object describing your client options
+                    // this will be fed directly into the boardgame.io/Client method
+                    // see https://boardgame.io/documentation/#/tutorial?id=defining-a-game
+    // OR
+    client: {},     // an already-initialized boardgame.io client
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+    // other options
+    autostart: true,    // whether or not to start the client automatically
+                        // if false, you must start the client yourself
+                        // default true
+})
+app.mount('#app')
 
-### If Using Volar
+```
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+## Usage
 
-### If Using Vetur
+From there, each component in your app has access to:
 
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+* `G`: a reactive object describing the current game state
+* `client`: a reactive object describing the client
+* `moves`: an object containing all the moves of your game
+
+For example, in a `.vue` file:
+
+```html
+<template>
+    <div class="player-hand">
+        <SingleCard v-for="(card, i) in G.playerHand" :card="card">
+    </div>
+
+    <button @click="playMove">Play Move</button>
+</template>
+
+<script>
+export default {
+    mounted(){
+        console.log(this.G)
+    },
+    methods: {
+        playMove(){
+            this.moves.playMove()
+        }
+    }
+}
+</script>
+
+```
+
+## Typescript
+
+For the best Typescript experience, add the following code in your types file (for example, `src/game-types.d.ts`):
+
+```js
+declare module '@vue/runtime-core' {
+    export interface ComponentCustomProperties {
+        G: YourGameStateType
+    }
+}
+```
+
+This way you'll be able to access `this.G` from any component and see autocompletion, types, etc.
