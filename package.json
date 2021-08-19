@@ -1,6 +1,6 @@
 {
   "name": "vue3-boardgame",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -12,7 +12,7 @@
   },
   "files": [
     "dist",
-    "types.d.ts"
+    "vue3-boardgame"
   ],
   "main": "./dist/vue3-boardgame.umd.js",
   "module": "./dist/vue3-boardgame.es.js",
