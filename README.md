@@ -26,6 +26,10 @@ app.use(boardgamePlugin, {
     autostart: true,    // whether or not to start the client automatically
                         // if false, you must start the client yourself
                         // default true
+    useMixin: true,     // whether to register special properties (see below) to a mixin
+                        // default true
+    useProvide: false,  // whether to register special properties (see below) using `provide`
+                        // default false
 })
 app.mount('#app')
 

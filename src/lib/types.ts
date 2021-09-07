@@ -31,5 +31,9 @@ export namespace Vue3Boardgame {
         client?: _ClientImpl
         /** Provide options to let the plugin create the client automatically. */
         options?: ClientOpts
+        /** Whether or not to register properties as mixins. Default true. */
+        useMixin?: boolean
+        /** Whether or not to register properties using provide. Default false. */
+        useProvide?: boolean
     }
 }

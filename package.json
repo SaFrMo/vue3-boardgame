@@ -1,10 +1,11 @@
 {
   "name": "vue3-boardgame",
-  "version": "1.0.0",
+  "version": "1.0.12",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "boardgame.io": "0.47.3",

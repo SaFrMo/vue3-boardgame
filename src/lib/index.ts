@@ -4,7 +4,10 @@ import { Plugin, reactive } from 'vue'
 import { Vue3Boardgame } from './types'
 
 export const boardgamePlugin: Plugin = {
-    install(app, { autostart, client, options }: Vue3Boardgame.BoardgamePluginOptions) {
+    install(app, { autostart, client, options, useMixin, useProvide }: Vue3Boardgame.BoardgamePluginOptions) {
+        useMixin = useMixin ?? true
+        useProvide = useProvide ?? false
+
         // create client if we have options
         if (!client && options) {
             client = Client(options)
@@ -33,19 +36,28 @@ export const boardgamePlugin: Plugin = {
             reactiveG.G = state.G as any
         })
 
-        // provide mixin
-        app.mixin({
-            computed: {
-                client() {
-                    return reactiveClient.client
-                },
-                G() {
-                    return reactiveG.G
-                },
-                moves() {
-                    return (this.client as _ClientImpl).moves
+        // global mixin
+        if (useMixin) {
+            app.mixin({
+                computed: {
+                    client() {
+                        return reactiveClient.client
+                    },
+                    G() {
+                        return reactiveG.G
+                    },
+                    moves() {
+                        return (this.client as _ClientImpl).moves
+                    }
                 }
-            }
-        })
+            })
+        }
+
+        // provude
+        if (useProvide) {
+            app.provide('client', reactiveClient.client)
+            app.provide('G', reactiveG.G)
+            app.provide('moves', reactiveClient.client.moves)
+        }
     }
 }
