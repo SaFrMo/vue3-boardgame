@@ -40,6 +40,7 @@ app.mount('#app')
 From there, each component in your app has access to:
 
 * `G`: a reactive object describing the current game state
+* `ctx`: a reactive object describing the current boardgame.io context
 * `client`: a reactive object describing the client
 * `moves`: an object containing all the moves of your game
 

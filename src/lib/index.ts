@@ -1,6 +1,6 @@
 import { Client } from 'boardgame.io/client'
 import { _ClientImpl, ClientState } from 'boardgame.io/dist/types/src/client/client'
-import { Plugin, reactive } from 'vue'
+import { Plugin, reactive, ref, Ref } from 'vue'
 import { Vue3Boardgame } from './types'
 
 export const boardgamePlugin: Plugin = {
@@ -24,16 +24,24 @@ export const boardgamePlugin: Plugin = {
         }
 
         // prep reactive client
-        const reactiveClient = reactive({ client: client })
+        const reactiveClient = ref(client)
+
+        const initialState = reactiveClient.value.getInitialState()
 
         // prep reactive G
-        const G = client.getInitialState().G
-        const reactiveG = reactive({ G })
+        const G = initialState.G
+        // const reactiveG = reactive({ G })
+        const reactiveG = ref(G)
+
+        // prep reactive ctx
+        const ctx = initialState.ctx
+        const reactiveCtx = ref(ctx)
 
         // subscribe to client updates
         client.subscribe((state: ClientState<any>) => {
             if (!state) return
-            reactiveG.G = state.G as any
+            reactiveG.value = state.G
+            reactiveCtx.value = state.ctx
         })
 
         // global mixin
@@ -41,13 +49,16 @@ export const boardgamePlugin: Plugin = {
             app.mixin({
                 computed: {
                     client() {
-                        return reactiveClient.client
+                        return reactiveClient
+                    },
+                    ctx() {
+                        return reactiveCtx
                     },
                     G() {
-                        return reactiveG.G
+                        return reactiveG
                     },
                     moves() {
-                        return (this.client as _ClientImpl).moves
+                        return (this.client as Ref<_ClientImpl>).value.moves
                     }
                 }
             })
@@ -55,9 +66,10 @@ export const boardgamePlugin: Plugin = {
 
         // provude
         if (useProvide) {
-            app.provide('client', reactiveClient.client)
-            app.provide('G', reactiveG.G)
-            app.provide('moves', reactiveClient.client.moves)
+            app.provide('client', reactiveClient)
+            app.provide('ctx', reactiveCtx)
+            app.provide('G', reactiveG)
+            app.provide('moves', reactiveClient.value.moves)
         }
     }
 }
