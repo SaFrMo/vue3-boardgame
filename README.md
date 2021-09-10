@@ -4,7 +4,7 @@ This is a plugin to make developing a Vue 3/[boardgame.io](https://boardgame.io/
 
 ## Installation
 
-`npm install vue3-boardgame`
+`npm install vue3-boardgame boardgame.io`
 
 Then, [create your Vue 3 app](https://v3.vuejs.org/guide/instance.html) and install:
 
